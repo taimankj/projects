@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #264653;
+}
+
+#home-nav {
+  background-color: #2a9d8f;
+  width: auto;
+  height: auto;
+  margin: auto auto;
+  padding: 20px;
+}
+
+#header {
+  background-color: sandybrown;
+  font-family: "Lucida Console", monospace;
+  padding: 16px;
+  margin: 16px;
+}
+
+ul {
+  background-color: #e9c46a;
+  padding: 10px 16px;
+  margin: 16px;
+}
+
+ul > li {
+  font-family: "Courier New", monospace;
+}
+
+a {
+  display: block;
+  padding: 7px;
+  margin: 0 auto;
+
+  font-size: 22px;
+  font-weight: 500;
+  color: #0c77a1;
+}
