@@ -4,9 +4,10 @@
 
 body {
   background-color: #264653;
+  margin: 30px;
 }
 
-#home-nav {
+#nav {
   background-color: #2a9d8f;
   width: auto;
   height: auto;

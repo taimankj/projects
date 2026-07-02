@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #264653;
+  padding: 30px;
+}
+
+nav {
+  background-color: #2a9d8f;
+  height: auto;
+  padding: 5px 30px 15px 15px;
+}
+
+nav > a {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  margin: 16px auto 16px 0;
+  padding: 5px;
+
+  background-color: #e9c46a;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0c77a1;
+}
+
+h1 {
+  width: auto;
+
+  margin: auto 0;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  padding: 5px;
+
+  background-color: sandybrown;
+  font-family: "Lucida Console", monospace;
+  text-align: center;
+}
+
+#content-img {
+  width: auto;
+  padding: 25px;
+  margin: 30px;
+}
+
+img {
+  display: block;
+  width: 400px;
+  margin: 10px auto;
+}
+
+#content {
+}
+
+#description {
+}
+
+#ingredients,
+#steps {
+}
+
+h1 {
+}
+
+h2 {
+}
