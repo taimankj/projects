@@ -64,8 +64,13 @@ img {
 #steps {
 }
 
-h1 {
-}
-
 h2 {
+  height: 35px;
+
+  padding-left: 15px;
+
+  background-color: #e76f51;
+  color: white;
+
+  border-radius: 25px;
 }
