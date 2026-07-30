@@ -1,0 +1,201 @@
+@import url("https://googleapis.com");
+
+/* Skeleton */
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100vh;
+  height: 100vh;
+}
+
+body > * {
+  margin: 0;
+}
+
+/* Header/Footer Styling */
+header,
+footer {
+  background-color: #1f2937;
+  color: white;
+  margin: 0;
+}
+
+.nav.one > p {
+  font-size: 24px;
+  color: #f9faf8;
+}
+
+a {
+  text-decoration: none;
+  font-size: 24px;
+  color: #e5e7eb;
+}
+
+li {
+  list-style-type: none;
+}
+
+h1 {
+  font-size: 48px;
+  color: #f9faf8;
+  font-weight: 900;
+}
+
+#nav-content > button {
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  padding: 8px;
+}
+
+#nav-image {
+  background-color: #6d747d;
+  text-align: center;
+}
+
+/* Header Format */
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+}
+
+.nav.one {
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+}
+
+ul {
+  margin: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.nav.two {
+  align-self: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px;
+  gap: 32px;
+}
+
+#nav-content {
+  flex: 0 0 400px;
+}
+
+#nav-image {
+  flex: 2 1 auto;
+  padding: 88px 0;
+}
+
+/* Footer Format */
+footer {
+  padding: 32px;
+  text-align: center;
+}
+
+/* Main Format */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 900;
+  color: #1f2937;
+  margin-bottom: 32px;
+}
+
+/* Cards Format */
+.cards {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin: 0px 48px 48px 48px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.card-image {
+  height: 200px;
+  border: 5px solid #3b82f6;
+  border-radius: 25px;
+}
+
+/* Quote Style/Format */
+.quote {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 256px;
+
+  background-color: #e5e7eb;
+}
+
+.thor-quote {
+  font-size: 36px;
+  font-style: italic;
+  color: #1f2937;
+}
+
+.thor {
+  font-weight: 900;
+  align-self: flex-end;
+}
+
+/* Format Action */
+#action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 64px;
+  background-color: #3882f6;
+  color: white;
+  margin: 48px;
+  border-radius: 8px;
+}
+
+#action > div {
+  flex: 2 1 auto;
+}
+
+#action > button {
+  background-color: #3882f6;
+  color: white;
+  border: 2px solid white;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 72px;
+  flex: 1 1 auto;
+}
+
+#action-line-one {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+
+#action-line-two {
+  margin-top: 0;
+}
