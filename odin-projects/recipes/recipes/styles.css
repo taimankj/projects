@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #264653;
+  padding: 30px;
+}
+
+nav {
+  background-color: #2a9d8f;
+  height: auto;
+  padding: 5px 30px 15px 15px;
+  border-radius: 25px;
+}
+
+a {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  margin: 16px auto 16px 0;
+  padding: 5px;
+  border-radius: 10px;
+
+  background-color: #e9c46a;
+  font-family: "Courier New", monospace;
+  font-size: 22px;
+  font-weight: 500;
+  color: #0c77a1;
+}
+
+h1 {
+  width: auto;
+
+  margin: auto 0;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 10px;
+
+  background-color: sandybrown;
+  font-family: "Lucida Console", monospace;
+  text-align: center;
+  font-size: 42px;
+}
+
+#content-img {
+  width: auto;
+  padding: 25px;
+  margin: 30px;
+}
+
+img {
+  display: block;
+  width: 400px;
+  margin: 10px auto;
+}
+
+#content {
+  background-color: #2a9d8f;
+
+  padding: 15px;
+  border-radius: 30px;
+}
+
+#description,
+#ingredients,
+#steps {
+  background-color: #e9c46a;
+  padding: 5px;
+  margin: 16px 0;
+  border-radius: 15px;
+
+  font-family: "Courier New", monospace;
+}
+
+h2 {
+  height: 35px;
+  width: 200px;
+
+  padding-left: 15px;
+  padding-top: 5px;
+  margin-left: 20px;
+
+  background-color: #e76f51;
+  color: white;
+  font-family: "Lucida Console", monospace;
+
+  border-radius: 25px;
+}

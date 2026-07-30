@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #264653;
+  margin: 30px;
+}
+
+#nav {
+  background-color: #2a9d8f;
+  width: auto;
+  height: auto;
+  margin: auto auto;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+#header {
+  background-color: sandybrown;
+  font-family: "Lucida Console", monospace;
+  padding: 16px;
+  margin: 16px;
+
+  border-radius: 10px;
+}
+
+ul {
+  background-color: #e9c46a;
+  padding: 10px 16px;
+  margin: 16px;
+
+  border-radius: 10px;
+  list-style-type: none;
+}
+
+ul > li {
+  font-family: "Courier New", monospace;
+}
+
+a {
+  display: block;
+  padding: 7px;
+  margin: 0 auto;
+
+  font-size: 22px;
+  font-weight: 500;
+  color: #0c77a1;
+}
