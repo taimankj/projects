@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'nordick';
+    src: url('nordick.woff2') format('woff2'),
+        url('nordick.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
