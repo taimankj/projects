@@ -23,10 +23,12 @@ body {
 }
 
 /* Header Content */
-
 .header {
   height: 100%;
   min-width: 400px;
+
+  background-image: url("./images/background.jpg");
+  color: white;
 
   flex: 1;
   display: flex;
@@ -39,6 +41,22 @@ body {
 
 .header div {
   margin-top: 50%;
+  width: 100%;
+
+  text-align: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+  font-size: 72px;
+  font-family: "nordick";
+}
+
+.logo {
+  height: 2em;
+  width: auto;
+  vertical-align: middle;
 }
 
 .header p {
