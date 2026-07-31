@@ -10,6 +10,9 @@
 
 :root {
   box-sizing: border-box;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Inter,
+    system-ui, sans-serif;
 }
 
 body {
@@ -89,10 +92,15 @@ body {
 /* Form */
 .main form {
   background-color: #ffffff;
-  box-shadow: 2px 2px 2px 1px #e5e5e6;
+  box-shadow: 2px 2px 2px 0.1px grey;
 
   display: flex;
   flex-flow: column wrap;
+}
+
+.legend {
+  margin: 15px;
+  font-weight: bold;
 }
 
 .input-wrapper {
@@ -103,18 +111,62 @@ body {
   display: flex;
   flex-flow: column wrap;
   gap: 32px;
+  font-size: 8px;
   margin: 32px;
+}
+
+input {
+  color: black;
+  border: 1px solid #e5e7eb;
+  border-radius: 2.5px;
+  padding: 5px;
 }
 
 label {
   display: flex;
   flex-direction: column;
+  font-family: sans-serif;
+}
+
+/* Input Pseudo Classes */
+input:focus {
+  box-shadow: 2px 2px 2px 0.5px grey;
+  border: 0.1px solid blue;
+}
+
+input:user-invalid {
+  border: 0.1px solid red;
 }
 
 /* Quote */
 .quote {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-weight: bold;
 }
 
 /* Submit */
 .submit {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.submit button {
+  background-color: #596d48;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 150px;
+  height: 25px;
+  font-weight: bold;
+}
+
+.submit a {
+  color: #596d48;
+  text-decoration: none;
 }
