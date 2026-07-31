@@ -8,7 +8,9 @@
   </head>
   <body>
     <div class="header">
-      <h1>ODIN</h1>
+      <div>
+        <h1>ODIN</h1>
+      </div>
       <p>Photo by Halie West on Unsplash</p>
     </div>
     <div class="main">
@@ -22,31 +24,39 @@
       </div>
 
       <form id="sign-up" action="" method="post">
-        <h1>Let's do this!</h1>
-        <label>
-          <input name="first-name" />
-          FIRST NAME
-        </label>
-        <label>
-          <input name="last-name" />
-          LAST NAME
-        </label>
-        <label>
-          <input type="email" name="mail" />
-          EMAIL
-        </label>
-        <label>
-          <input type="tel" name="cell" />
-          PHONE NUMBER
-        </label>
-        <label>
-          <input type="password" name="password" />
-          PASSWORD
-        </label>
-        <label>
-          <input type="password" name="confirmed-password" />
-          CONFIRM PASSWORD
-        </label>
+        <div class="legend">
+          <legend>Let's do this!</legend>
+        </div>
+        <div class="input-wrapper">
+          <div class="input">
+            <label>
+              FIRST NAME
+              <input name="first-name" />
+            </label>
+            <label>
+              EMAIL
+              <input type="email" name="mail" />
+            </label>
+            <label>
+              PASSWORD
+              <input type="password" name="password" />
+            </label>
+          </div>
+          <div class="input">
+            <label>
+              LAST NAME
+              <input name="last-name" />
+            </label>
+            <label>
+              PHONE NUMBER
+              <input type="tel" name="cell" />
+            </label>
+            <label>
+              CONFIRM PASSWORD
+              <input type="password" name="confirmed-password" />
+            </label>
+          </div>
+        </div>
       </form>
 
       <div class="submit">
