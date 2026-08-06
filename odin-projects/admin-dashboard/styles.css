@@ -74,6 +74,45 @@ body {
 .nav {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
+
+  display: grid;
+  grid-template: 1fr 1fr;
+
+  padding-left: 64px;
+  padding-right: 64px;
+
+  background: grey;
+  div div {
+    border: 1px solid black;
+  }
+
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 64px;
+
+    .search-bar {
+      flex-grow: 1;
+    }
+  }
+
+  .bottom-nav {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    .profile-big {
+      flex-grow: 1;
+    }
+
+    .actions {
+      flex-grow: 2;
+      position: absolute;
+      right: 0;
+    }
+  }
 }
 
 .main {
