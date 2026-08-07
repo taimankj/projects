@@ -88,52 +88,63 @@ svg {
   div div {
     border: 1px solid black;
   }
+}
 
-  .top-nav {
+.top-nav {
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+
+  font-size: 0.5rem;
+
+  svg {
+    width: 0.7rem;
+  }
+
+  .search-bar {
+    flex-grow: 1;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 64px;
 
-    .search-bar {
-      flex-grow: 1;
+    input {
+      background: #e2e8f0;
+      border-radius: 25px;
+      border: none;
+      width: 90%;
+      height: 32px;
     }
   }
 
-  .bottom-nav {
+  .profile-small {
     display: flex;
+    justify-content: space-around;
     align-items: center;
+    gap: 18px;
 
-    position: relative;
-
-    .profile-big {
-      flex-grow: 1;
-    }
-
-    .actions {
-      flex-grow: 2;
-      position: absolute;
-      right: 0;
-    }
+    font-size: 0.85em;
   }
 }
 
-.search-bar {
+.bottom-nav {
+  grid-row: 2;
   display: flex;
   align-items: center;
 
-  input {
-    background: #e2e8f0;
-    border-radius: 25px;
-    border: none;
-    width: 60%;
-    height: 32px;
+  position: relative;
+
+  .profile-big {
+    flex-grow: 1;
   }
 
-  svg {
-    width: 0.7em;
+  .actions {
+    flex-grow: 2;
+    position: absolute;
+    right: 0;
   }
 }
+
 .main {
   grid-row: 2 / 3;
   grid-column: 2 / 3;
