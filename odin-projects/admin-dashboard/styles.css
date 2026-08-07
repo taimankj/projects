@@ -84,12 +84,7 @@ svg {
 
   padding: 16px 64px;
 
-  font-size: 0.5em;
-
-  background: grey;
-  div div {
-    border: 1px solid black;
-  }
+  font-size: 0.5rem;
 }
 
 .top-nav {
@@ -98,8 +93,6 @@ svg {
   justify-content: space-between;
   align-items: center;
   gap: 32px;
-
-  font-size: 0.35rem;
 
   svg {
     width: 0.7rem;
@@ -154,6 +147,24 @@ svg {
     flex-grow: 2;
     position: absolute;
     right: 0;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 32px;
+
+    height: 65%;
+    width: 40%;
+
+    button {
+      background: #1992d4;
+      border-radius: 25px;
+      color: white;
+      border: none;
+      font-size: 0.65em;
+      width: 50%;
+      padding: 5px;
+    }
   }
 }
 
