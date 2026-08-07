@@ -296,8 +296,8 @@ svg {
 
   .cards {
     display: grid;
-    grid-template-rows: repeat(3, 75px);
-    place-items: center center;
+    grid-template-rows: repeat(4s, 75px);
+    place-items: center start;
     row-gap: 15px;
 
     background: white;
