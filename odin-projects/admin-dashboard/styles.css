@@ -80,9 +80,11 @@ svg {
 
   display: grid;
   grid-template: 1fr 1fr;
+  gap: 16px;
 
-  padding-left: 64px;
-  padding-right: 64px;
+  padding: 16px 64px;
+
+  font-size: 0.5em;
 
   background: grey;
   div div {
@@ -97,7 +99,7 @@ svg {
   align-items: center;
   gap: 32px;
 
-  font-size: 0.5rem;
+  font-size: 0.35rem;
 
   svg {
     width: 0.7rem;
@@ -131,11 +133,21 @@ svg {
   grid-row: 2;
   display: flex;
   align-items: center;
-
   position: relative;
+  font-size: 0.5rem;
 
   .profile-big {
     flex-grow: 1;
+    display: flex;
+    gap: 16px;
+
+    span {
+      font-size: 0.5em;
+    }
+
+    svg {
+      width: 2em;
+    }
   }
 
   .actions {
