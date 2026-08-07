@@ -70,10 +70,19 @@ body > div {
   a {
     color: white;
     text-decoration: none;
+
+    span {
+      font-size: 1.3em;
+      font-weight: 600;
+    }
   }
 
   ul {
     list-style-type: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
 
   svg {
