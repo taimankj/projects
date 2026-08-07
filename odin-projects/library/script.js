@@ -20,6 +20,8 @@ function displayBooks(books) {
   if (books.length == 0) {
     const header = document.createElement("h1");
     header.innerText = `No books added yet!`;
+
+    document.querySelector("body").appendChild(header);
     return;
   }
 }
