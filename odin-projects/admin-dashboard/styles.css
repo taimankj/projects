@@ -246,6 +246,42 @@ svg {
 .announcements {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
+
+  display: grid;
+  grid-template-rows: minmax(0.5rem, 0.7rem) 1fr;
+  width: 100%;
+
+  font-size: 0.25rem;
+
+  p {
+    font-size: 0.9em;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-rows: repeat(3, 125px);
+    place-items: center center;
+    row-gap: 15px;
+
+    background: white;
+    border-radius: 5px;
+    padding: 30px;
+  }
+
+  .card {
+    padding-bottom: 15px;
+    border-bottom: 3px solid #d2d2d2;
+
+    .title {
+      font-weight: 600;
+      font-size: 1.125em;
+    }
+  }
+
+  .card:last-child {
+    padding-bottom: none;
+    border: none;
+  }
 }
 
 .trends {
