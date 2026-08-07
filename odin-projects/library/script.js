@@ -14,4 +14,12 @@ function addBookToLibrary(author, title) {
   myLirbrary.push(newBook);
 }
 
-addBookToLibrary("J.K. Rowling", "Harry Potter and the Goblet of Fire");
+function displayBooks(books) {
+  const table = document.createElement("table");
+
+  if (books.length == 0) {
+    const header = document.createElement("h1");
+    header.innerText = `No books added yet!`;
+    return;
+  }
+}
