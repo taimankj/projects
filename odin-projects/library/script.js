@@ -15,13 +15,17 @@ function addBookToLibrary(author, title) {
 }
 
 function displayBooks(books) {
-  const table = document.createElement("table");
-
   if (books.length == 0) {
     const header = document.createElement("h1");
     header.innerText = `No books added yet!`;
 
-    document.querySelector("body").appendChild(header);
+    const div = document.createElement("div");
+    div.className = "alert-message";
+    div.appendChild(header);
+
+    document.querySelector("body").appendChild(div);
     return;
   }
 }
+
+displayBooks(myLirbrary);

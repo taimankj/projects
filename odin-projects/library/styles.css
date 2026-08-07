@@ -1,0 +1,19 @@
+table {
+  table-layout: fixed;
+  width: 90%;
+  margin: 10px auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.6em;
+}
+
+.alert-message {
+  width: 100vw;
+  height: clamp(50px, calc(0.2 * 100vh), 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
