@@ -10,6 +10,10 @@ td {
   padding: 0.6em;
 }
 
+table * {
+  border: 1px solid black;
+}
+
 .alert-message {
   width: 100vw;
   height: clamp(50px, calc(0.2 * 100vh), 100px);
