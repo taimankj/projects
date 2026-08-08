@@ -1,17 +1,57 @@
 table {
-  table-layout: fixed;
-  width: 90%;
+  table-layout: auto;
   margin: 10px auto;
   border-collapse: collapse;
+
+  * {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    padding: 0.6em;
+  }
+
+  button {
+    width: 125px;
+    height: calc(0.3 * 125px);
+    border: none;
+    border-radius: 50px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: rgba(255, 255, 255, 0.735);
+  }
+
+  button:hover {
+    color: white;
+    cursor: pointer;
+  }
 }
 
-th,
-td {
-  padding: 0.6em;
+.table-button {
+  display: flex;
+  align-items: cener;
+  justify-content: center;
+  border: none;
 }
 
-table * {
-  border: 1px solid black;
+/* Buttons */
+.delete {
+  background-color: red;
+}
+
+.delete:hover {
+  box-shadow: 0px 0px 7px 0px red;
+}
+
+.add {
+  background-color: green;
+}
+
+.add:hover {
+  box-shadow: 0px 0px 7px 5px green;
 }
 
 .alert-message {

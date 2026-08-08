@@ -27,6 +27,7 @@ function displayBooks(books) {
       tr.appendChild(td);
     }
 
+    appendRemoveButton(tr);
     tbody.appendChild(tr);
   }
 }
@@ -40,6 +41,18 @@ function alertUserNoBooksAdded() {
   div.appendChild(header);
 
   document.querySelector("body").appendChild(div);
+}
+
+function appendRemoveButton(ele) {
+  const button = document.createElement("button");
+  button.className = "delete";
+  button.type = "button";
+  button.innerText = "Remove";
+
+  const td = document.createElement("td");
+  td.className = "table-button";
+  td.appendChild(button);
+  ele.appendChild(td);
 }
 
 // Test books
