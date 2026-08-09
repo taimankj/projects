@@ -1,14 +1,10 @@
 .main {
   display: grid;
   grid-template-columns: 2fr minmax(10%, 20%);
-}
-
-.add-book * {
-  display: none;
+  padding: 5px;
 }
 
 .add-book {
-  position: sticky;
   display: flex;
   justify-content: center;
   align-items: start;
@@ -24,20 +20,39 @@
 form {
   color: white;
   font-size: 24px;
-  /* background: #f9c74f;
-  padding-top: 50px;
-  padding-left: 30px;
-  padding-right: 25px;
+  background: #f9c74f;
+  padding: 40px 30px;
   border-radius: 10px;
-  border-left: 5px solid #f9844a; */
-  height: 100%;
+  border-left: 5px solid #f9844a;
+  height: auto;
 
   input {
     border: none;
     background: #f8961e;
     border-radius: 50px;
     height: 24px;
+    padding: 5px 15px;
   }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    border: none;
+
+    label {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+input[type="text"] {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 table {
