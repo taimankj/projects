@@ -19,11 +19,17 @@
 }
 
 form {
+  color: white;
   font-size: 24px;
+  background: #f9c74f;
+  padding: 15px;
+  padding-left: 30px;
+  border-radius: 10px;
+  border-left: 5px solid #f9844a;
 
   input {
     border: none;
-    background: lightseagreen;
+    background: #f8961e;
     border-radius: 50px;
     height: 24px;
   }
@@ -78,20 +84,20 @@ button {
 }
 
 .delete {
-  background-color: red;
+  background-color: #f94144;
 }
 
 .delete:hover {
-  box-shadow: 0px 0px 7px 0px red;
+  box-shadow: 0px 0px 7px 0px #f94144;
 }
 
 .add {
-  background-color: green;
+  background-color: #90be6d;
 }
 
 .add:hover,
 form button:hover {
-  box-shadow: 0px 0px 7px 5px green;
+  box-shadow: 0px 0px 7px 5px #90be6d;
 }
 
 .alert-message {
@@ -103,6 +109,6 @@ form button:hover {
 }
 
 form button {
-  background: green;
+  background: #90be6d;
   align-self: start;
 }
