@@ -1,7 +1,43 @@
+.main {
+  display: grid;
+  grid-template-columns: 2fr minmax(10%, 20%);
+  border: 1px solid black;
+}
+
+.add-book {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}
+
+form {
+  font-size: 24px;
+
+  input {
+    border: none;
+    background: lightseagreen;
+    border-radius: 50px;
+    height: 24px;
+  }
+}
+
+.main > div {
+  border: 1px solid black;
+}
+
 table {
   table-layout: auto;
   margin: 10px auto;
   border-collapse: collapse;
+  width: 95%;
 
   * {
     border: 1px solid black;
@@ -13,14 +49,6 @@ table {
   }
 
   button {
-    width: 125px;
-    height: calc(0.3 * 125px);
-    border: none;
-    border-radius: 50px;
-
-    font-size: 16px;
-    font-weight: 600;
-
     color: rgba(255, 255, 255, 0.735);
   }
 
@@ -38,6 +66,17 @@ table {
 }
 
 /* Buttons */
+button {
+  width: 125px;
+  height: calc(0.3 * 125px);
+  border: none;
+  border-radius: 50px;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .delete {
   background-color: red;
 }
@@ -50,7 +89,8 @@ table {
   background-color: green;
 }
 
-.add:hover {
+.add:hover,
+form button:hover {
   box-shadow: 0px 0px 7px 5px green;
 }
 
@@ -60,4 +100,9 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+form button {
+  background: green;
+  align-self: start;
 }
