@@ -1,7 +1,10 @@
 .main {
   display: grid;
   grid-template-columns: 2fr minmax(10%, 20%);
-  border: 1px solid black;
+}
+
+.add-book * {
+  display: none;
 }
 
 .add-book {
@@ -21,11 +24,13 @@
 form {
   color: white;
   font-size: 24px;
-  background: #f9c74f;
-  padding: 15px;
+  /* background: #f9c74f;
+  padding-top: 50px;
   padding-left: 30px;
+  padding-right: 25px;
   border-radius: 10px;
-  border-left: 5px solid #f9844a;
+  border-left: 5px solid #f9844a; */
+  height: 100%;
 
   input {
     border: none;
@@ -33,10 +38,6 @@ form {
     border-radius: 50px;
     height: 24px;
   }
-}
-
-.main > div {
-  border: 1px solid black;
 }
 
 table {
