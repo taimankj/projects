@@ -55,26 +55,42 @@ function appendRemoveButton(ele) {
   ele.appendChild(td);
 }
 
+const submitButton = document.querySelector('button[type="submit"]');
+const dialog = document.querySelector("dialog#add-book");
+
+submitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let author = document.querySelector("#author");
+  let book = document.querySelector("#book");
+
+  addBookToLibrary(author.value, book.value);
+
+  author.value = "";
+  book.value = "";
+  dialog.close();
+});
+
 // Test books
-addBookToLibrary("George Orwell", "1984");
-addBookToLibrary("J.R.R. Tolkien", "The Hobbit");
-addBookToLibrary("Harper Lee", "To Kill a Mockingbird");
-addBookToLibrary("F. Scott Fitzgerald", "The Great Gatsby");
-addBookToLibrary("Jane Austen", "Pride and Prejudice");
-addBookToLibrary("Ray Bradbury", "Fahrenheit 451");
-addBookToLibrary("Mary Shelley", "Frankenstein");
-addBookToLibrary("Bram Stoker", "Dracula");
-addBookToLibrary("Herman Melville", "Moby-Dick");
-addBookToLibrary("J.D. Salinger", "The Catcher in the Rye");
-addBookToLibrary("Aldous Huxley", "Brave New World");
-addBookToLibrary("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
-addBookToLibrary("Stephen King", "The Shining");
-addBookToLibrary("Frank Herbert", "Dune");
-addBookToLibrary("Suzanne Collins", "The Hunger Games");
-addBookToLibrary("Andy Weir", "The Martian");
-addBookToLibrary("Cormac McCarthy", "The Road");
-addBookToLibrary("Margaret Atwood", "The Handmaid's Tale");
-addBookToLibrary("William Golding", "Lord of the Flies");
-addBookToLibrary("Khaled Hosseini", "The Kite Runner");
+// addBookToLibrary("George Orwell", "1984");
+// addBookToLibrary("J.R.R. Tolkien", "The Hobbit");
+// addBookToLibrary("Harper Lee", "To Kill a Mockingbird");
+// addBookToLibrary("F. Scott Fitzgerald", "The Great Gatsby");
+// addBookToLibrary("Jane Austen", "Pride and Prejudice");
+// addBookToLibrary("Ray Bradbury", "Fahrenheit 451");
+// addBookToLibrary("Mary Shelley", "Frankenstein");
+// addBookToLibrary("Bram Stoker", "Dracula");
+// addBookToLibrary("Herman Melville", "Moby-Dick");
+// addBookToLibrary("J.D. Salinger", "The Catcher in the Rye");
+// addBookToLibrary("Aldous Huxley", "Brave New World");
+// addBookToLibrary("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
+// addBookToLibrary("Stephen King", "The Shining");
+// addBookToLibrary("Frank Herbert", "Dune");
+// addBookToLibrary("Suzanne Collins", "The Hunger Games");
+// addBookToLibrary("Andy Weir", "The Martian");
+// addBookToLibrary("Cormac McCarthy", "The Road");
+// addBookToLibrary("Margaret Atwood", "The Handmaid's Tale");
+// addBookToLibrary("William Golding", "Lord of the Flies");
+// addBookToLibrary("Khaled Hosseini", "The Kite Runner");
 
 displayBooks(myLibrary);
