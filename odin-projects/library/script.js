@@ -18,6 +18,7 @@ function displayBooks(books) {
   }
 
   const tbody = document.querySelector(".books tbody");
+  tbody.innerHTML = "";
   for (let i = 0; i < books.length; i++) {
     const tr = document.createElement("tr");
 
@@ -55,20 +56,23 @@ function appendRemoveButton(ele) {
   ele.appendChild(td);
 }
 
-const submitButton = document.querySelector('button[type="submit"]');
+const form = document.querySelector("form");
 const dialog = document.querySelector("dialog#add-book");
 
-submitButton.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let author = document.querySelector("#author");
-  let book = document.querySelector("#book");
+  const formData = new FormData(e.target);
 
-  addBookToLibrary(author.value, book.value);
+  let userInput = Object.fromEntries(formData.entries());
+
+  addBookToLibrary(userInput.author, userInput.book);
 
   author.value = "";
   book.value = "";
   dialog.close();
+
+  displayBooks(myLibrary);
 });
 
 // Test books
