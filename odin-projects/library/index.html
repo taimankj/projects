@@ -15,11 +15,7 @@
           <th>Book</th>
           <th>User ID</th>
           <th>
-            <button
-              class="add"
-              command="show-modal"
-              commandfor="add-book-dialog"
-            >
+            <button class="add" command="show-modal" commandfor="add-book">
               Add
             </button>
           </th>
@@ -27,8 +23,8 @@
         <tbody></tbody>
       </table>
     </div>
-    <dialog id="add-book-dialog">
-      <button class="close-dialog" command="close" commandfor="add-book-dialog">
+    <dialog id="add-book">
+      <button class="close-dialog" command="close" commandfor="add-book">
         X
       </button>
       <form method="dialog">
