@@ -19,9 +19,29 @@ function Gameboard() {
 
   const getBoardPos = (pos) => {};
 
-  const setBoardPos = (pos) => {};
+  const setBoardPos = (rowPos, colPos, marker) => {
+    const rows = {
+      TOP: 0,
+      MIDDLE: 1,
+      BOTTOM: 2,
+    };
 
-  const displayBoard = () => {};
+    const cols = {
+      LEFT: 0,
+      MIDDLE: 1,
+      RIGHT: 2,
+    };
+
+    board[rows[rowPos]][cols[colPos]] = marker;
+  };
+
+  const displayBoard = () => {
+    console.log(`${board[0][0]} | ${board[0][1]} | ${board[0][2]}`);
+    console.log(`----------`);
+    console.log(`${board[1][0]} | ${board[1][1]} | ${board[1][2]}`);
+    console.log(`----------`);
+    console.log(`${board[2][0]} | ${board[2][1]} | ${board[2][2]}`);
+  };
 
   return { getBoardPos, setBoardPos, displayBoard };
 }
