@@ -1,21 +1,18 @@
-function Player(name = "NPC") {
+function Player(name, marker) {
   let wins = 0;
 
   const getWins = () => wins;
   const addWin = () => wins++;
+  const getMarker = () => marker;
 
-  return { name, getWins, addWin };
+  return { name, getMarker, getWins, addWin };
 }
 
 function Gameboard() {
   // [x][y]
   //    x - row position
   //    y - column position
-  let board = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ];
+  let board = [new Array(3), new Array(3), new Array(3)];
 
   const rows = {
     TOP: 0,
@@ -31,19 +28,19 @@ function Gameboard() {
 
   const getBoardPos = (rowPos, colPos) => board[rows[rowPos]][cols[colPos]];
 
-  const setBoardPos = (rowPos, colPos, marker) => {
-    board[rows[rowPos]][cols[colPos]] = marker;
+  const setBoardPos = (rowPos, colPos, player) => {
+    board[rows[rowPos]][cols[colPos]] = player;
   };
 
   const displayBoard = () => {
     console.log(
-      `${board[rows["TOP"]][cols["LEFT"]]} | ${board[rows["TOP"]][cols["MIDDLE"]]} | ${board[rows["TOP"]][cols["RIGHT"]]}`,
+      `${board[rows["TOP"]][cols["LEFT"]].getMarker()} | ${board[rows["TOP"]][cols["MIDDLE"]].getMarker()} | ${board[rows["TOP"]][cols["RIGHT"]].getMarker()}`,
     );
     console.log(
-      `${board[rows["MIDDLE"]][cols["LEFT"]]} | ${board[rows["MIDDLE"]][cols["MIDDLE"]]} | ${board[rows["MIDDLE"]][cols["RIGHT"]]}`,
+      `${board[rows["MIDDLE"]][cols["LEFT"]].getMarker()} | ${board[rows["MIDDLE"]][cols["MIDDLE"]].getMarker()} | ${board[rows["MIDDLE"]][cols["RIGHT"]].getMarker()}`,
     );
     console.log(
-      `${board[rows["BOTTOM"]][cols["LEFT"]]} | ${board[rows["BOTTOM"]][cols["MIDDLE"]]} | ${board[rows["BOTTOM"]][cols["RIGHT"]]}`,
+      `${board[rows["BOTTOM"]][cols["LEFT"]].getMarker()} | ${board[rows["BOTTOM"]][cols["MIDDLE"]].getMarker()} | ${board[rows["BOTTOM"]][cols["RIGHT"]].getMarker()}`,
     );
   };
 
