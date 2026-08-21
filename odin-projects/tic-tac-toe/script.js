@@ -12,6 +12,10 @@ function Gameboard() {
   //  [x][y]
   //    x - row position
   //    y - column position
+  //  board with index on each spot
+  //    [0][0] | [0][1] | [0][2]
+  //    [1][0] | [1][1] | [1][2]
+  //    [2][0] | [2][1] | [2][2]
   let board = [
     ["", "", ""],
     ["", "", ""],
@@ -91,6 +95,27 @@ const GameControl = (() => {
     //    spot is a corner
     //      spot is a top-left or bottom-right corner
     //      spot is a top-right or bottom-left corner
+    winFound = checkColumnAndRow(rowPos, colPos, move);
+    if (winFound) {
+      return winFound;
+    }
+
+    const rowIndex = ttt.rows[rowPos];
+    const colIndex = ttt.cols[colPos];
+    // check if move is on center (checks left and right diagonal - \ and /)
+    if (rowIndex * colIndex == 1) {
+      return checkCenter(rowPos, colPos, move);
+    }
+
+    // check if move is on top-left or bottom-right corner (checks left diagonal - \)
+    if (rowIndex + colIndex == 0 || rowIndex + colIndex == 4) {
+      return checkLeftDiagonal(rowPos, colPos, move);
+    }
+
+    // check if move is on top-right or bottom-left corner (checks right diagonal - /)
+    if (rowIndex + colIndex == 2) {
+      return checkRightDiagonal(rowPos, colPos, move);
+    }
   };
 
   const resetGame = () => {
