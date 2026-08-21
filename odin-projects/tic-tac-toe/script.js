@@ -51,15 +51,25 @@ function Gameboard() {
     }
   };
 
-  return { getBoardPos, setBoardPos, displayBoard };
+  const resetBoard = () => {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        board[i][j] = "";
+      }
+    }
+  };
+
+  return { getBoardPos, setBoardPos, displayBoard, resetBoard };
 }
 
 const GameControl = (() => {
-  let { getBoardPos, setBoardPos, displayBoard } = Gameboard();
+  let { getBoardPos, setBoardPos, displayBoard, resetBoard } = Gameboard();
 
   const checkWinner = () => {};
 
-  const resetGame = () => {};
+  const resetGame = () => {
+    resetBoard();
+  };
 
   return { setBoardPos, displayBoard, checkWinner, resetGame };
 })();
@@ -67,17 +77,3 @@ const GameControl = (() => {
 // Test
 const me = Player("keoni", "x");
 const npc = Player("npc", "o");
-
-// GameControl.setBoardPos("TOP", "LEFT", me);
-// GameControl.setBoardPos("TOP", "MIDDLE", npc);
-// GameControl.setBoardPos("TOP", "RIGHT", me);
-
-// GameControl.setBoardPos("MIDDLE", "LEFT", npc);
-// GameControl.setBoardPos("MIDDLE", "MIDDLE", me);
-// GameControl.setBoardPos("MIDDLE", "RIGHT", npc);
-
-// GameControl.setBoardPos("BOTTOM", "LEFT", npc);
-// GameControl.setBoardPos("BOTTOM", "MIDDLE", me);
-// GameControl.setBoardPos("BOTTOM", "RIGHT", me);
-
-GameControl.displayBoard();
