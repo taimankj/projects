@@ -33,6 +33,10 @@ function Gameboard() {
   const getBoardPos = (rowPos, colPos) => board[rows[rowPos]][cols[colPos]];
 
   const setBoardPos = (rowPos, colPos, player) => {
+    if (board[rows[rowPos]][cols[colPos]] != "") {
+      console.log("Spot taken!");
+      return;
+    }
     board[rows[rowPos]][cols[colPos]] = player;
   };
 
