@@ -12,7 +12,11 @@ function Gameboard() {
   // [x][y]
   //    x - row position
   //    y - column position
-  let board = [new Array(3), new Array(3), new Array(3)];
+  let board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
 
   const rows = {
     TOP: 0,
@@ -33,15 +37,18 @@ function Gameboard() {
   };
 
   const displayBoard = () => {
-    console.log(
-      `${board[rows["TOP"]][cols["LEFT"]].getMarker()} | ${board[rows["TOP"]][cols["MIDDLE"]].getMarker()} | ${board[rows["TOP"]][cols["RIGHT"]].getMarker()}`,
-    );
-    console.log(
-      `${board[rows["MIDDLE"]][cols["LEFT"]].getMarker()} | ${board[rows["MIDDLE"]][cols["MIDDLE"]].getMarker()} | ${board[rows["MIDDLE"]][cols["RIGHT"]].getMarker()}`,
-    );
-    console.log(
-      `${board[rows["BOTTOM"]][cols["LEFT"]].getMarker()} | ${board[rows["BOTTOM"]][cols["MIDDLE"]].getMarker()} | ${board[rows["BOTTOM"]][cols["RIGHT"]].getMarker()}`,
-    );
+    for (let i = 0; i < board.length; i++) {
+      let currLine = "";
+
+      for (let j = 0; j < board[i].length; j++) {
+        let curr = board[i][j];
+        let onLastEle = j === board[i].length - 1;
+        let isCurrEmpty = Object.getPrototypeOf(curr) === String.prototype;
+        currLine += `${!isCurrEmpty ? curr.getMarker() : "[]"} ${!onLastEle ? "|" : ""} `;
+      }
+
+      console.log(currLine);
+    }
   };
 
   return { getBoardPos, setBoardPos, displayBoard };
@@ -61,16 +68,16 @@ const GameControl = (() => {
 const me = Player("keoni", "x");
 const npc = Player("npc", "o");
 
-GameControl.setBoardPos("TOP", "LEFT", me);
-GameControl.setBoardPos("TOP", "MIDDLE", npc);
-GameControl.setBoardPos("TOP", "RIGHT", me);
+// GameControl.setBoardPos("TOP", "LEFT", me);
+// GameControl.setBoardPos("TOP", "MIDDLE", npc);
+// GameControl.setBoardPos("TOP", "RIGHT", me);
 
-GameControl.setBoardPos("MIDDLE", "LEFT", npc);
-GameControl.setBoardPos("MIDDLE", "MIDDLE", me);
-GameControl.setBoardPos("MIDDLE", "RIGHT", npc);
+// GameControl.setBoardPos("MIDDLE", "LEFT", npc);
+// GameControl.setBoardPos("MIDDLE", "MIDDLE", me);
+// GameControl.setBoardPos("MIDDLE", "RIGHT", npc);
 
-GameControl.setBoardPos("BOTTOM", "LEFT", npc);
-GameControl.setBoardPos("BOTTOM", "MIDDLE", me);
-GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+// GameControl.setBoardPos("BOTTOM", "LEFT", npc);
+// GameControl.setBoardPos("BOTTOM", "MIDDLE", me);
+// GameControl.setBoardPos("BOTTOM", "RIGHT", me);
 
 GameControl.displayBoard();
