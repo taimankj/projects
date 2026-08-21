@@ -46,3 +46,15 @@ function Gameboard() {
 
   return { getBoardPos, setBoardPos, displayBoard };
 }
+
+function GameControl(playerOne, playerTwo) {
+  let board = Gameboard();
+
+  const setPlayerMove = (player) => {};
+
+  const checkWinner = () => {};
+
+  const resetGame = () => {};
+
+  return { setPlayerMove, checkWinner, resetGame };
+}
