@@ -17,42 +17,34 @@ function Gameboard() {
     [null, null, null],
   ];
 
-  const getBoardPos = (rowPos, colPos) => {
-    const rows = {
-      TOP: 0,
-      MIDDLE: 1,
-      BOTTOM: 2,
-    };
-
-    const cols = {
-      LEFT: 0,
-      MIDDLE: 1,
-      RIGHT: 2,
-    };
-
-    return board[rows[rowPos]][cols[colPos]];
+  const rows = {
+    TOP: 0,
+    MIDDLE: 1,
+    BOTTOM: 2,
   };
 
+  const cols = {
+    LEFT: 0,
+    MIDDLE: 1,
+    RIGHT: 2,
+  };
+
+  const getBoardPos = (rowPos, colPos) => board[rows[rowPos]][cols[colPos]];
+
   const setBoardPos = (rowPos, colPos, marker) => {
-    const rows = {
-      TOP: 0,
-      MIDDLE: 1,
-      BOTTOM: 2,
-    };
-
-    const cols = {
-      LEFT: 0,
-      MIDDLE: 1,
-      RIGHT: 2,
-    };
-
     board[rows[rowPos]][cols[colPos]] = marker;
   };
 
   const displayBoard = () => {
-    console.log(`${board[0][0]} | ${board[0][1]} | ${board[0][2]}`);
-    console.log(`${board[1][0]} | ${board[1][1]} | ${board[1][2]}`);
-    console.log(`${board[2][0]} | ${board[2][1]} | ${board[2][2]}`);
+    console.log(
+      `${board[rows["TOP"]][cols["LEFT"]]} | ${board[rows["TOP"]][cols["MIDDLE"]]} | ${board[rows["TOP"]][cols["RIGHT"]]}`,
+    );
+    console.log(
+      `${board[rows["MIDDLE"]][cols["LEFT"]]} | ${board[rows["MIDDLE"]][cols["MIDDLE"]]} | ${board[rows["MIDDLE"]][cols["RIGHT"]]}`,
+    );
+    console.log(
+      `${board[rows["BOTTOM"]][cols["LEFT"]]} | ${board[rows["BOTTOM"]][cols["MIDDLE"]]} | ${board[rows["BOTTOM"]][cols["RIGHT"]]}`,
+    );
   };
 
   return { getBoardPos, setBoardPos, displayBoard };
