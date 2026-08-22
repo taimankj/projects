@@ -41,7 +41,15 @@ function Gameboard() {
     RIGHT: 2,
   };
 
-  const getBoardPos = (rowPos, colPos) => board[rows[rowPos]][cols[colPos]];
+  const getBoardPos = (rowPos, colPos) => {
+    if (
+      Object.getPrototypeOf(rowPos) === Number.prototype &&
+      Object.getPrototypeOf(colPos) === Number.prototype
+    ) {
+      return board[rowPos][colPos];
+    }
+    return board[rows[rowPos]][cols[colPos]];
+  };
 
   const setBoardPos = (rowPos, colPos, player) => {
     if (board[rows[rowPos]][cols[colPos]] != "") {
@@ -98,6 +106,9 @@ const GameControl = (() => {
 
       // if this is true last position has been reached and nothing went wrong, resulting in a win; so return true
       if (`${col}`.localeCompare("RIGHT") == 0) {
+        console.log(
+          `Win found on ${rowPos} row. Congratulations ${move.name}!`,
+        );
         return true;
       }
     }
@@ -112,6 +123,9 @@ const GameControl = (() => {
         break;
       }
       if (`${row}`.localeCompare("BOTTOM") == 0) {
+        console.log(
+          `Win found on ${colPos} column. Congratulations ${move.name}!`,
+        );
         return true;
       }
     }
@@ -120,11 +134,47 @@ const GameControl = (() => {
     return false;
   };
 
-  const checkLeftDiagonal = (rowPos, colPos, move) => {};
+  const checkLeftDiagonal = (move) => {
+    for (let i = 0; i < 3; i++) {
+      let spot = ttt.getBoardPos(i, i);
+      if (Object.getPrototypeOf(spot) === String.prototype) {
+        break;
+      }
+      if (spot.getMarker().localeCompare(move.getMarker()) != 0) {
+        break;
+      }
+      if (i == 2) {
+        console.log(
+          `Win found on left diagonal. Congratulations ${move.name}!`,
+        );
+        return true;
+      }
+    }
+    return false;
+  };
 
-  const checkRightDiagonal = (rowPos, colPos, move) => {};
+  const checkRightDiagonal = (move) => {
+    for (let i = 0; i < 3; i++) {
+      let spot = ttt.getBoardPos(i, 3 - (i + 1));
+      if (Object.getPrototypeOf(spot) === String.prototype) {
+        break;
+      }
+      if (spot.getMarker().localeCompare(move.getMarker()) != 0) {
+        break;
+      }
+      if (i == 2) {
+        console.log(
+          `Win found on right diagonal. Congratulations ${move.name}!`,
+        );
+        return true;
+      }
+    }
+    return false;
+  };
 
-  const checkCenter = (rowPos, colPos, move) => {};
+  const checkCenter = (move) => {
+    return checkLeftDiagonal(move) ? true : checkRightDiagonal(move);
+  };
 
   const checkWinner = (rowPos, colPos) => {
     let winFound = false;
@@ -150,22 +200,26 @@ const GameControl = (() => {
     const colIndex = ttt.cols[colPos];
     // check if move is on center (checks left and right diagonal - \ and /)
     if (rowIndex * colIndex == 1) {
-      return checkCenter(rowPos, colPos, move);
+      return checkCenter(move);
     }
 
     // check if move is on top-left or bottom-right corner (checks left diagonal - \)
     if (rowIndex + colIndex == 0 || rowIndex + colIndex == 4) {
-      return checkLeftDiagonal(rowPos, colPos, move);
+      return checkLeftDiagonal(move);
     }
 
     // check if move is on top-right or bottom-left corner (checks right diagonal - /)
     if (rowIndex + colIndex == 2) {
-      return checkRightDiagonal(rowPos, colPos, move);
+      return checkRightDiagonal(move);
     }
+
+    // no diagonal check applies and no wins found on the column or row
+    // so return false
+    return false;
   };
 
   const resetGame = () => {
-    resetBoard();
+    ttt.resetBoard();
   };
 
   return {
@@ -180,3 +234,307 @@ const GameControl = (() => {
 // Test
 const me = Player("keoni", "x");
 const npc = Player("npc", "o");
+// ========================================
+// PLAYER TESTS
+// ========================================
+
+console.log("===== PLAYER TESTS =====");
+
+console.log(me.name); // keoni
+console.log(me.getMarker()); // x
+console.log(me.getWins()); // 0
+
+me.addWin();
+
+console.log(me.getWins()); // 1
+
+me.addWin();
+
+console.log(me.getWins()); // 2
+
+// ========================================
+// NO WIN YET
+// ========================================
+
+console.log("\n===== NO WIN TEST =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("TOP", "LEFT")); // false
+
+// ========================================
+// TOP ROW WIN
+// ========================================
+
+console.log("\n===== TOP ROW WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "RIGHT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("TOP", "RIGHT")); // true
+
+// ========================================
+// MIDDLE ROW WIN
+// ========================================
+
+console.log("\n===== MIDDLE ROW WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "RIGHT", npc);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("MIDDLE", "RIGHT")); // true
+
+// ========================================
+// BOTTOM ROW WIN
+// ========================================
+
+console.log("\n===== BOTTOM ROW WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("BOTTOM", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "MIDDLE", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "RIGHT")); // true
+
+// ========================================
+// LEFT COLUMN WIN
+// ========================================
+
+console.log("\n===== LEFT COLUMN WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "LEFT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "LEFT")); // true
+
+// ========================================
+// MIDDLE COLUMN WIN
+// ========================================
+
+console.log("\n===== MIDDLE COLUMN WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "MIDDLE", npc);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "MIDDLE")); // true
+
+// ========================================
+// RIGHT COLUMN WIN
+// ========================================
+
+console.log("\n===== RIGHT COLUMN WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "RIGHT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "RIGHT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "RIGHT")); // true
+
+// ========================================
+// LEFT DIAGONAL WIN
+// TOP-LEFT -> CENTER -> BOTTOM-RIGHT
+// ========================================
+
+console.log("\n===== LEFT DIAGONAL WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "RIGHT")); // true
+
+// ========================================
+// RIGHT DIAGONAL WIN
+// TOP-RIGHT -> CENTER -> BOTTOM-LEFT
+// ========================================
+
+console.log("\n===== RIGHT DIAGONAL WIN =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "RIGHT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "LEFT", npc);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "LEFT")); // true
+
+// ========================================
+// CENTER MOVE DIAGONAL TEST
+// ========================================
+
+console.log("\n===== CENTER DIAGONAL TEST =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.setBoardPos("MIDDLE", "MIDDLE", me);
+GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("MIDDLE", "MIDDLE")); // true
+
+// ========================================
+// SPOT ALREADY TAKEN
+// ========================================
+
+console.log("\n===== SPOT TAKEN TEST =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "LEFT", npc);
+// Expected console:
+// Spot taken!
+
+GameControl.displayBoard();
+
+// TOP LEFT should still be x
+
+// ========================================
+// DRAW / FULL BOARD WITH NO WIN
+// ========================================
+
+console.log("\n===== DRAW TEST =====");
+
+GameControl.resetGame();
+
+GameControl.setBoardPos("TOP", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("TOP", "RIGHT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "LEFT", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "MIDDLE", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("MIDDLE", "RIGHT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "LEFT", npc);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "MIDDLE", me);
+GameControl.displayBoard();
+
+GameControl.setBoardPos("BOTTOM", "RIGHT", me);
+GameControl.displayBoard();
+
+console.log("Winner:", GameControl.checkWinner("BOTTOM", "RIGHT")); // false
