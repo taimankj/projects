@@ -80,6 +80,52 @@ function Gameboard() {
 const GameControl = (() => {
   let ttt = Gameboard();
 
+  const checkColumnAndRow = (rowPos, colPos, move) => {
+    //  checking row from rowPos-LEFT to rowPos-RIGHT
+    for (const col in ttt.cols) {
+      // grabs the move in the first position to check
+      let spot = ttt.getBoardPos(rowPos, `${col}`);
+
+      // checks if the spot is empty and if so, end row check
+      if (Object.getPrototypeOf(spot) === String.prototype) {
+        break;
+      }
+
+      // spot contains a player's move; now we check if the move (player) is different, so we can break early from mismatches (i.e. no win in the row)
+      if (spot.getMarker().localeCompare(move.getMarker()) != 0) {
+        break;
+      }
+
+      // if this is true last position has been reached and nothing went wrong, resulting in a win; so return true
+      if (`${col}`.localeCompare("RIGHT") == 0) {
+        return true;
+      }
+    }
+
+    // checking column from TOP-colPos to BOTTOM-colPos
+    for (const row in ttt.rows) {
+      let spot = ttt.getBoardPos(`${row}`, colPos);
+      if (Object.getPrototypeOf(spot) === String.prototype) {
+        break;
+      }
+      if (spot.getMarker().localeCompare(move.getMarker()) != 0) {
+        break;
+      }
+      if (`${row}`.localeCompare("BOTTOM") == 0) {
+        return true;
+      }
+    }
+
+    // return false when code reaches here (no wins)
+    return false;
+  };
+
+  const checkLeftDiagonal = (rowPos, colPos, move) => {};
+
+  const checkRightDiagonal = (rowPos, colPos, move) => {};
+
+  const checkCenter = (rowPos, colPos, move) => {};
+
   const checkWinner = (rowPos, colPos) => {
     let winFound = false;
     const move = ttt.getBoardPos(rowPos, colPos);
@@ -127,6 +173,7 @@ const GameControl = (() => {
     displayBoard: ttt.displayBoard,
     checkWinner,
     resetGame,
+    checkColumnAndRow,
   };
 })();
 
