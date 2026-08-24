@@ -240,43 +240,61 @@ const GameControl = (() => {
     players["npc"] = new Player("npc", marker === "x" ? "o" : "x");
   };
 
+  const getPlayer = (player) => players[player];
+
   return {
     setBoardPos: ttt.setBoardPos,
     displayBoard: ttt.displayBoard,
     checkWinner,
     resetGame,
     addPlayer,
+    getPlayer,
   };
 })();
 
 // HTML Rendering
-let gameLoaded = false;
-
-function loadTicTacToe() {
-  gameLoaded = true;
+function loadTicTacToe(name, playerMarker) {
   const container = document.querySelector(".container");
+  const playerName = document.querySelector("#player-name");
+
+  GameControl.addPlayer(name, playerMarker);
+
   container.style["display"] = "grid";
+  playerName.innerText = name;
+}
+
+function playGame(player) {
+  const npc = GameControl.getPlayer("npc");
 }
 
 document.querySelector("#play").addEventListener("click", (e) => {
   e.preventDefault();
 
+  // Collect and set player info
+  const choices = document.querySelectorAll('input[type="radio"]');
+  const name = document.querySelector("#name").value;
+  let playerMarker;
+  choices.forEach((e) => {
+    if (e.checked) {
+      playerMarker = e.value;
+    }
+  });
+
   document.querySelector("body").removeChild(document.querySelector("form"));
 
-  loadTicTacToe();
+  loadTicTacToe(name, playerMarker);
+
+  // Starts Game
+  playGame(GameControl.getPlayer(name));
 });
 
-document.querySelectorAll(".cell").forEach((node) => {
-  node.addEventListener("click", (e) => {
-    const curr = e.target;
-    if (curr.className.includes("player") || curr.className.includes("npc")) {
-      return;
-    }
-    curr.className += " player";
-    curr.innerText = "X";
-  });
-});
-
-// Test
-const me = Player("keoni", "x");
-const npc = Player("npc", "o");
+// document.querySelectorAll(".cell").forEach((node) => {
+//   node.addEventListener("click", (e) => {
+//     const curr = e.target;
+//     if (curr.className.includes("player") || curr.className.includes("npc")) {
+//       return;
+//     }
+//     curr.className += " player";
+//     curr.innerText = "x";
+//   });
+// });
