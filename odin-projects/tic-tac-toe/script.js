@@ -265,6 +265,32 @@ function loadTicTacToe(name, playerMarker) {
 
 function playGame(player) {
   const npc = GameControl.getPlayer("npc");
+  let winner;
+
+  // First round runs until winner is declared
+  while (!winner) {
+    // gameboard filled?
+    //    win reached?
+    //      give winner 1 point
+    //      set winner
+    //    no win reached?
+    //      reset round
+    // player with 'x' goes first
+    // player with 'o' goes next
+  }
+
+  // Second round and beyond, winners goes first
+  // Will keep iterating
+  while (true) {
+    // gameboard filled?
+    //    win reached?
+    //      give winner 1 point
+    //      set winner
+    //    no win reached?
+    //      reset round
+    // winner makes first move
+    // loser makes next move
+  }
 }
 
 document.querySelector("#play").addEventListener("click", (e) => {
