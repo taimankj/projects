@@ -1,0 +1,99 @@
+:root {
+  box-sizing: border-box;
+  font-size: 32px;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body * {
+  margin: 0;
+  padding: 0;
+}
+
+/* Home Page Styling */
+form {
+  width: 75%;
+  height: 35%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+form > * {
+  padding: 8px;
+}
+
+.name-input,
+.choices {
+  width: 75%;
+}
+
+.name-input {
+  border: none;
+  input {
+    width: 75%;
+  }
+}
+
+.choices {
+  display: flex;
+  gap: 8px;
+}
+
+#play {
+  width: 15%;
+}
+
+/* Gameboard Styling */
+.container {
+  display: grid;
+  width: 70%;
+  height: 25%;
+  grid-template-columns: 1fr 2fr;
+}
+
+.container > * {
+  border: 1px solid black;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 8px;
+
+  .game-actions {
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    button {
+      height: 42px;
+      width: 64px;
+    }
+  }
+}
+
+.game-board {
+  display: grid;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+
+  .cell {
+    border: 2px solid black;
+    background: gold;
+  }
+}

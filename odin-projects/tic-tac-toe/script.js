@@ -271,20 +271,24 @@ function loadTicTacToe() {
     `;
 
   gameBoard.innerHTML = `
-    <div class='grid-tl'></div>
-    <div class='grid-tm'></div>
-    <div class='grid-tr'></div>
-    <div class='grid-ml'></div>
-    <div class='grid-mm'></div>
-    <div class='grid-mr'></div>
-    <div class='grid-bl'></div>
-    <div class='grid-bm'></div>
-    <div class='grid-br'></div>
+    <div class='cell cell-tl'></div>
+    <div class='cell cell-tm'></div>
+    <div class='cell cell-tr'></div>
+    <div class='cell cell-ml'></div>
+    <div class='cell cell-mm'></div>
+    <div class='cell cell-mr'></div>
+    <div class='cell cell-bl'></div>
+    <div class='cell cell-bm'></div>
+    <div class='cell cell-br'></div>
     `;
 
   container.appendChild(gameInfo);
   container.appendChild(gameBoard);
   body.appendChild(container);
+
+  // edit home page styling
+  // body.style["display"] = "block";
+  // body.style['position'] = 'relative';
 }
 
 document.querySelector("#play").addEventListener("click", (e) => {
