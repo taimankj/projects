@@ -1,3 +1,4 @@
+// Game
 function Player(name, marker) {
   let wins = 0;
 
@@ -241,6 +242,58 @@ const GameControl = (() => {
     checkColumnAndRow,
   };
 })();
+
+// HTML Rendering
+let gameLoaded = false;
+
+function loadTicTacToe() {
+  gameLoaded = true;
+  const body = document.querySelector("body");
+  const container = document.createElement("div");
+  const gameInfo = document.createElement("div");
+  const gameBoard = document.createElement("div");
+
+  container.className = "container";
+  gameInfo.className = "game-info";
+  gameBoard.className = "game-board";
+
+  gameInfo.innerHTML = `
+    <div class='player-wins'>
+      <span id='player-name'></span> Wins: <span id='player-wins'></span>
+    </div>
+    <div class='npc-wins'>
+      Opponent Wins: <span id='npc-wins'></span>
+    </div>
+    <div class='game-actions'>
+      <button class='clear'>Clear</button>
+      <button class='reset'>Reset</button>
+    </div>
+    `;
+
+  gameBoard.innerHTML = `
+    <div class='grid-tl'></div>
+    <div class='grid-tm'></div>
+    <div class='grid-tr'></div>
+    <div class='grid-ml'></div>
+    <div class='grid-mm'></div>
+    <div class='grid-mr'></div>
+    <div class='grid-bl'></div>
+    <div class='grid-bm'></div>
+    <div class='grid-br'></div>
+    `;
+
+  container.appendChild(gameInfo);
+  container.appendChild(gameBoard);
+  body.appendChild(container);
+}
+
+document.querySelector("#play").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.querySelector("body").removeChild(document.querySelector("form"));
+
+  loadTicTacToe();
+});
 
 // Test
 const me = Player("keoni", "x");

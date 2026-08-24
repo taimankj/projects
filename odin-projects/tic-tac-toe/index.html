@@ -7,5 +7,24 @@
     <link href="./styles.css" rel="stylesheet" />
     <script src="./script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <form>
+      <fieldset>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+      </fieldset>
+      <div class="choices">
+        <legend>Choose:</legend>
+        <div>
+          <input type="radio" id="x" name="choice" value="x" checked />
+          <label for="x">X</label>
+        </div>
+        <div>
+          <input type="radio" id="o" name="choice" value="o" />
+          <label for="o">O</label>
+        </div>
+      </div>
+      <button id="play">Play</button>
+    </form>
+  </body>
 </html>
