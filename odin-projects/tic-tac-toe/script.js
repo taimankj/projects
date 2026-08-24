@@ -91,6 +91,7 @@ function Gameboard() {
 
 const GameControl = (() => {
   let ttt = Gameboard();
+  let players = {};
 
   const checkColumnAndRow = (rowPos, colPos, move) => {
     //  checking row from rowPos-LEFT to rowPos-RIGHT
@@ -234,12 +235,17 @@ const GameControl = (() => {
     }
   };
 
+  const addPlayer = (player, marker) => {
+    players[player] = new Player(player, marker);
+    players["npc"] = new Player("npc", marker === "x" ? "o" : "x");
+  };
+
   return {
     setBoardPos: ttt.setBoardPos,
     displayBoard: ttt.displayBoard,
     checkWinner,
     resetGame,
-    checkColumnAndRow,
+    addPlayer,
   };
 })();
 
@@ -248,47 +254,8 @@ let gameLoaded = false;
 
 function loadTicTacToe() {
   gameLoaded = true;
-  const body = document.querySelector("body");
-  const container = document.createElement("div");
-  const gameInfo = document.createElement("div");
-  const gameBoard = document.createElement("div");
-
-  container.className = "container";
-  gameInfo.className = "game-info";
-  gameBoard.className = "game-board";
-
-  gameInfo.innerHTML = `
-    <div class='player-wins'>
-      <span id='player-name'></span> Wins: <span id='player-wins'></span>
-    </div>
-    <div class='npc-wins'>
-      Opponent Wins: <span id='npc-wins'></span>
-    </div>
-    <div class='game-actions'>
-      <button class='clear'>Clear</button>
-      <button class='reset'>Reset</button>
-    </div>
-    `;
-
-  gameBoard.innerHTML = `
-    <div class='cell cell-tl'></div>
-    <div class='cell cell-tm'></div>
-    <div class='cell cell-tr'></div>
-    <div class='cell cell-ml'></div>
-    <div class='cell cell-mm'></div>
-    <div class='cell cell-mr'></div>
-    <div class='cell cell-bl'></div>
-    <div class='cell cell-bm'></div>
-    <div class='cell cell-br'></div>
-    `;
-
-  container.appendChild(gameInfo);
-  container.appendChild(gameBoard);
-  body.appendChild(container);
-
-  // edit home page styling
-  // body.style["display"] = "block";
-  // body.style['position'] = 'relative';
+  const container = document.querySelector(".container");
+  container.style["display"] = "grid";
 }
 
 document.querySelector("#play").addEventListener("click", (e) => {
@@ -297,6 +264,17 @@ document.querySelector("#play").addEventListener("click", (e) => {
   document.querySelector("body").removeChild(document.querySelector("form"));
 
   loadTicTacToe();
+});
+
+document.querySelectorAll(".cell").forEach((node) => {
+  node.addEventListener("click", (e) => {
+    const curr = e.target;
+    if (curr.className.includes("player") || curr.className.includes("npc")) {
+      return;
+    }
+    curr.className += " player";
+    curr.innerText = "X";
+  });
 });
 
 // Test
