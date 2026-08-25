@@ -227,6 +227,18 @@ const GameControl = (() => {
     return false;
   };
 
+  const checkBoardFilled = () => {
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let curr = ttt.getBoardPos(i, j);
+        if (Object.getPrototypeOf(curr) === String.prototype) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   const resetGame = (hardReset, playerOne, playerTwo) => {
     ttt.resetBoard();
     if (hardReset) {
@@ -249,6 +261,7 @@ const GameControl = (() => {
     resetGame,
     addPlayer,
     getPlayer,
+    checkBoardFilled,
   };
 })();
 
@@ -265,31 +278,75 @@ function loadTicTacToe(name, playerMarker) {
 
 function playGame(player) {
   const npc = GameControl.getPlayer("npc");
-  let winner;
+  let winReached = false;
 
   // First round runs until winner is declared
-  while (!winner) {
-    // gameboard filled?
-    //    win reached?
-    //      give winner 1 point
-    //      set winner
-    //    no win reached?
-    //      reset round
-    // player with 'x' goes first
-    // player with 'o' goes next
+  while (!winReached) {
+    if (GameControl.checkBoardFilled()) {
+      let hardReset = false;
+      GameControl.resetGame(hardReset, null, null);
+      winReached = true; // though no win was reached at this point, this will allow the loop to end
+    } else {
+      if (player.getMarker() === "x") {
+        // player goes first
+        // player gets 3-in-a-row
+        //  yes
+        //    increment player's win
+        //    reset board
+        //    set winner as player
+        //    break
+        //  no
+        //    npc goes next
+        //    npc gets 3-in-a-row
+        //      yes
+        //        increment npc's win
+        //        reset board
+        //        set npc as winner
+        //        break out of loop
+        //      no
+        //        continue with loop
+      } else {
+        // npc goes first
+        // npc gets 3-in-a-row
+        //  yes
+        //    increment npc's win
+        //    reset board
+        //    set winner as npc
+        //    break out of loop
+        //  no
+        //    player goes next
+        //    player gets 3-in-a-row
+        //      yes
+        //        increment player's win
+        //        reset board
+        //        set player as winner
+        //        break out of loop
+        //      no
+        //        continue with loop
+      }
+    }
   }
 
   // Second round and beyond, winners goes first
-  // Will keep iterating
+  // Will keep iterating with winner of previous game making the first move
   while (true) {
-    // gameboard filled?
-    //    win reached?
-    //      give winner 1 point
-    //      set winner
-    //    no win reached?
-    //      reset round
-    // winner makes first move
-    // loser makes next move
+    if (GameControl.checkBoardFilled()) {
+      let hardReset = false;
+      GameControl.resetGame(hardReset, null, null);
+    } else {
+      // winner goes first
+      // winner gets 3-in-a-row
+      //  yes
+      //    increment winner's wins
+      //    reset board
+      //  no
+      //    loser goes next
+      //    loser gets 3-in-a-row
+      //      yes
+      //        increment loser's wins
+      //        reset board
+      //        set loser as winner
+    }
   }
 }
 
