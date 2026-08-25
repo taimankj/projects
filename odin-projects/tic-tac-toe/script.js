@@ -265,7 +265,6 @@ const GameControl = (() => {
   };
 })();
 
-// HTML Rendering
 function loadTicTacToe(name, playerMarker) {
   const container = document.querySelector(".container");
   const playerName = document.querySelector("#player-name");
@@ -276,76 +275,121 @@ function loadTicTacToe(name, playerMarker) {
   playerName.innerText = name;
 }
 
-function playGame(player) {
-  const npc = GameControl.getPlayer("npc");
-  let winReached = false;
+function getNPCMove(randomMove) {
+  switch (randomMove) {
+    case 1:
+      return { row: "TOP", column: "LEFT" };
+    case 2:
+      return { row: "TOP", column: "MIDDLE" };
+    case 3:
+      return { row: "TOP", column: "RIGHT" };
+    case 4:
+      return { row: "MIDDLE", column: "LEFT" };
+    case 5:
+      return { row: "MIDDLE", column: "MIDDLE" };
+    case 6:
+      return { row: "MIDDLE", column: "RIGHT" };
+    case 7:
+      return { row: "BOTTOM", column: "LEFT" };
+    case 8:
+      return { row: "BOTTOM", column: "MIDDLE" };
+    case 9:
+      return { row: "BOTTOM", column: "RIGHT" };
+  }
+}
 
-  // First round runs until winner is declared
-  while (!winReached) {
-    if (GameControl.checkBoardFilled()) {
-      let hardReset = false;
-      GameControl.resetGame(hardReset, null, null);
-      winReached = true; // though no win was reached at this point, this will allow the loop to end
-    } else {
-      if (player.getMarker() === "x") {
-        // player goes first
-        // player gets 3-in-a-row
-        //  yes
-        //    increment player's win
-        //    reset board
-        //    set winner as player
-        //    break
-        //  no
-        //    npc goes next
-        //    npc gets 3-in-a-row
-        //      yes
-        //        increment npc's win
-        //        reset board
-        //        set npc as winner
-        //        break out of loop
-        //      no
-        //        continue with loop
-      } else {
-        // npc goes first
-        // npc gets 3-in-a-row
-        //  yes
-        //    increment npc's win
-        //    reset board
-        //    set winner as npc
-        //    break out of loop
-        //  no
-        //    player goes next
-        //    player gets 3-in-a-row
-        //      yes
-        //        increment player's win
-        //        reset board
-        //        set player as winner
-        //        break out of loop
-        //      no
-        //        continue with loop
+function getCell(boardCells, row, column) {
+  let returnCell;
+
+  boardCells.forEach((cell) => {
+    if (cell.className.includes(row) && cell.className.includes(column)) {
+      returnCell = cell;
+    }
+  });
+
+  return returnCell;
+}
+
+function makeMove(row, column, player, cell) {
+  cell.className += ` ${player.name}`;
+  cell.innerText += ` ${player.getMarker()}`;
+  return GameControl.checkWinner(row, column);
+}
+
+function setPlayerMove(p1, p2) {
+  const boardCells = document.querySelectorAll(".cell");
+  let didWin = false;
+  let moveMade = false;
+  if (p1.name === "npc") {
+    while (!moveMade) {
+      let randomMove = Math.floor(Math.random() * 9) + 1;
+      let { row, column } = getNPCMove(randomMove);
+      let cell = getCell(boardCells, row, column);
+      if (
+        cell.className.includes(`${p1.name}`) ||
+        cell.className.includes(`${p2.name}`)
+      ) {
+        continue;
       }
+      didWin = makeMove(row, column, p1, cell);
+      moveMade = true;
+    }
+  } else {
+    while (!moveMade) {
+      boardCells.forEach((cell) => {
+        cell.addEventListener("click", (e) => {
+          const curr = e.target;
+          const row = curr.className.split(" ")[1];
+          const column = curr.className.split(" ")[2];
+
+          if (
+            curr.className.includes(`${p1.name}`) ||
+            curr.className.includes(`${p2.name}`)
+          ) {
+            alert("Spot taken! Choose another spot.");
+            return;
+          }
+          didWin = makeMove(row, column, p1, curr);
+          moveMade = true;
+        });
+      });
     }
   }
 
-  // Second round and beyond, winners goes first
-  // Will keep iterating with winner of previous game making the first move
-  while (true) {
+  return didWin;
+}
+
+function setMoves(p1, p2, winInfo) {
+  winInfo.winReached = setPlayerMove(p1, p2);
+  if (winInfo.winReached) {
+    p1.addWin();
+    GameControl.resetGame(false, null, null);
+    winInfo.winner = p1;
+    winInfo.loser = p2;
+    return;
+  }
+  winInfo.winReached = setPlayerMove(p2, p1);
+  if (winInfo.winReached) {
+    p2.addWin();
+    GameControl.resetGame(false, null, null);
+    winInfo.winner = p2;
+    winInfo.loser = p1;
+  }
+}
+
+function playGame(player) {
+  const npc = GameControl.getPlayer("npc");
+  let winInfo = {
+    winner: player.getMarker() === "x" ? player : npc,
+    loser: player.getMarker() === "x" ? npc : player,
+    winReached: false,
+  };
+
+  while (!winInfo.winReached) {
     if (GameControl.checkBoardFilled()) {
-      let hardReset = false;
-      GameControl.resetGame(hardReset, null, null);
+      GameControl.resetGame(false, null, null);
     } else {
-      // winner goes first
-      // winner gets 3-in-a-row
-      //  yes
-      //    increment winner's wins
-      //    reset board
-      //  no
-      //    loser goes next
-      //    loser gets 3-in-a-row
-      //      yes
-      //        increment loser's wins
-      //        reset board
-      //        set loser as winner
+      setMoves(winInfo.winner, winInfo.loser, winInfo);
     }
   }
 }
