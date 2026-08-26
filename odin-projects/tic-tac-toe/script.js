@@ -238,8 +238,8 @@ const GameControl = (() => {
     }
   };
 
-  const addPlayer = (player, marker) => {
-    players[player] = new Player(player, marker);
+  const addPlayer = (playerName, marker) => {
+    players[playerName] = new Player(playerName, marker);
     players["npc"] = new Player("npc", marker === "x" ? "o" : "x");
   };
 
@@ -354,7 +354,11 @@ document.querySelector("#play").addEventListener("click", (e) => {
 
   // if player.getMarker() is 'o', have npc make a move
   if (GameControl.getPlayer(name).getMarker() === "o") {
-    npcMakeMove(GameControl.getPlayer("npc"), GameControl.getPlayer(name));
+    npcMakeMove(
+      GameControl.getPlayer("npc"),
+      GameControl.getPlayer(name),
+      document.querySelectorAll(".cell"),
+    );
   }
 
   // set event listeners for board game
