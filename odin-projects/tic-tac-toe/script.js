@@ -29,7 +29,7 @@ function Gameboard() {
   //  rows and cols are used to grab/set board spots
   //  arguments for getBoardPos/setBoardPos will be as such
   //    'TOP', 'LEFT'
-  //    'TOP', 'MIDDLE',
+  //    'TOP', 'CENTER',
   //    'TOP', 'RIGHT',
   //    ...
   //    'BOTTOM', 'RIGHT'
@@ -41,7 +41,7 @@ function Gameboard() {
 
   const cols = {
     LEFT: 0,
-    MIDDLE: 1,
+    CENTER: 1,
     RIGHT: 2,
   };
 
@@ -112,9 +112,6 @@ const GameControl = (() => {
       // if this is true last position has been reached and nothing went wrong, resulting in a win; so return true
       if (`${col}`.localeCompare("RIGHT") == 0) {
         move.addWin();
-        console.log(
-          `Win found on ${rowPos} row. Congratulations ${move.name}! Curent Wins: ${move.getWins()}`,
-        );
         return true;
       }
     }
@@ -152,9 +149,6 @@ const GameControl = (() => {
       }
       if (i == 2) {
         move.addWin();
-        console.log(
-          `Win found on left diagonal. Congratulations ${move.name}! Curent Wins: ${move.getWins()}`,
-        );
         return true;
       }
     }
@@ -172,9 +166,6 @@ const GameControl = (() => {
       }
       if (i == 2) {
         move.addWin();
-        console.log(
-          `Win found on right diagonal. Congratulations ${move.name}! Curent Wins: ${move.getWins()}`,
-        );
         return true;
       }
     }
@@ -275,24 +266,24 @@ function loadTicTacToe(name, playerMarker) {
   playerName.innerText = name;
 }
 
-function getNPCMove(randomMove) {
+function getNPCMoveSet(randomMove) {
   switch (randomMove) {
     case 1:
       return { row: "TOP", column: "LEFT" };
     case 2:
-      return { row: "TOP", column: "MIDDLE" };
+      return { row: "TOP", column: "CENTER" };
     case 3:
       return { row: "TOP", column: "RIGHT" };
     case 4:
       return { row: "MIDDLE", column: "LEFT" };
     case 5:
-      return { row: "MIDDLE", column: "MIDDLE" };
+      return { row: "MIDDLE", column: "CENTER" };
     case 6:
       return { row: "MIDDLE", column: "RIGHT" };
     case 7:
       return { row: "BOTTOM", column: "LEFT" };
     case 8:
-      return { row: "BOTTOM", column: "MIDDLE" };
+      return { row: "BOTTOM", column: "CENTER" };
     case 9:
       return { row: "BOTTOM", column: "RIGHT" };
   }
@@ -313,87 +304,37 @@ function getCell(boardCells, row, column) {
 function makeMove(row, column, player, cell) {
   cell.className += ` ${player.name}`;
   cell.innerText += ` ${player.getMarker()}`;
+  GameControl.setBoardPos(row, column, player);
   return GameControl.checkWinner(row, column);
 }
 
-function setPlayerMove(p1, p2) {
-  const boardCells = document.querySelectorAll(".cell");
-  let didWin = false;
+function npcMakeMove(npc, player, boardCells) {
   let moveMade = false;
-  if (p1.name === "npc") {
-    while (!moveMade) {
-      let randomMove = Math.floor(Math.random() * 9) + 1;
-      let { row, column } = getNPCMove(randomMove);
-      let cell = getCell(boardCells, row, column);
-      if (
-        cell.className.includes(`${p1.name}`) ||
-        cell.className.includes(`${p2.name}`)
-      ) {
-        continue;
-      }
-      didWin = makeMove(row, column, p1, cell);
-      moveMade = true;
+  let didWin;
+  while (!moveMade) {
+    let randomMove = Math.floor(Math.random() * 9) + 1;
+    let { row, column } = getNPCMoveSet(randomMove);
+    let cell = getCell(boardCells, row, column);
+    if (
+      cell.className.includes(`${npc.name}`) ||
+      cell.className.includes(`${player.name}`)
+    ) {
+      continue;
     }
-  } else {
-    while (!moveMade) {
-      boardCells.forEach((cell) => {
-        cell.addEventListener("click", (e) => {
-          const curr = e.target;
-          const row = curr.className.split(" ")[1];
-          const column = curr.className.split(" ")[2];
-
-          if (
-            curr.className.includes(`${p1.name}`) ||
-            curr.className.includes(`${p2.name}`)
-          ) {
-            alert("Spot taken! Choose another spot.");
-            return;
-          }
-          didWin = makeMove(row, column, p1, curr);
-          moveMade = true;
-        });
-      });
-    }
+    didWin = makeMove(row, column, npc, cell);
+    moveMade = true;
   }
-
   return didWin;
 }
 
-function setMoves(p1, p2, winInfo) {
-  winInfo.winReached = setPlayerMove(p1, p2);
-  if (winInfo.winReached) {
-    p1.addWin();
-    GameControl.resetGame(false, null, null);
-    winInfo.winner = p1;
-    winInfo.loser = p2;
-    return;
-  }
-  winInfo.winReached = setPlayerMove(p2, p1);
-  if (winInfo.winReached) {
-    p2.addWin();
-    GameControl.resetGame(false, null, null);
-    winInfo.winner = p2;
-    winInfo.loser = p1;
-  }
+function resetGameHTML(board) {
+  board.forEach((cell) => {
+    let className = cell.className.split(" ");
+    let removedPlayer = className.slice(0, 3).join(" ");
+    cell.className = removedPlayer;
+    cell.innerText = "";
+  });
 }
-
-function playGame(player) {
-  const npc = GameControl.getPlayer("npc");
-  let winInfo = {
-    winner: player.getMarker() === "x" ? player : npc,
-    loser: player.getMarker() === "x" ? npc : player,
-    winReached: false,
-  };
-
-  while (!winInfo.winReached) {
-    if (GameControl.checkBoardFilled()) {
-      GameControl.resetGame(false, null, null);
-    } else {
-      setMoves(winInfo.winner, winInfo.loser, winInfo);
-    }
-  }
-}
-
 document.querySelector("#play").addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -411,17 +352,54 @@ document.querySelector("#play").addEventListener("click", (e) => {
 
   loadTicTacToe(name, playerMarker);
 
-  // Starts Game
-  playGame(GameControl.getPlayer(name));
+  // if player.getMarker() is 'o', have npc make a move
+  if (GameControl.getPlayer(name).getMarker() === "o") {
+    npcMakeMove(GameControl.getPlayer("npc"), GameControl.getPlayer(name));
+  }
+
+  // set event listeners for board game
+  setUpGame(GameControl.getPlayer(name), GameControl.getPlayer("npc"));
 });
 
-// document.querySelectorAll(".cell").forEach((node) => {
-//   node.addEventListener("click", (e) => {
-//     const curr = e.target;
-//     if (curr.className.includes("player") || curr.className.includes("npc")) {
-//       return;
-//     }
-//     curr.className += " player";
-//     curr.innerText = "x";
-//   });
-// });
+// add event listener for all board cells
+// when a board cell is clicked, player has made their move
+// check for wins
+// if there is a win end game and soft reset the game
+// if there is no win, have npc make the next move
+function setUpGame(player, npc) {
+  const boardCells = document.querySelectorAll(".cell");
+  const playerWins = document.querySelector("#player-wins");
+  const npcWins = document.querySelector("#npc-wins");
+  boardCells.forEach((cell) => {
+    cell.addEventListener("click", (e) => {
+      const curr = e.target;
+      const row = curr.className.split(" ")[1];
+      const column = curr.className.split(" ")[2];
+      let didWin;
+
+      if (
+        curr.className.includes(`${player.name}`) ||
+        curr.className.includes(`${npc.name}`)
+      ) {
+        alert("Spot taken! Choose another spot.");
+        return;
+      }
+
+      didWin = makeMove(row, column, player, curr);
+      if (didWin) {
+        alert(`${player.name} wins!`);
+        playerWins.innerText = `${player.getWins()}`;
+        GameControl.resetGame(false, null, null);
+        resetGameHTML(boardCells);
+      } else {
+        didWin = npcMakeMove(npc, player, boardCells);
+        if (didWin) {
+          alert(`${npc.name} wins!`);
+          npcWins.innerText = `${npc.getWins()}`;
+          GameControl.resetGame(false, null, null);
+          resetGameHTML(boardCells);
+        }
+      }
+    });
+  });
+}
