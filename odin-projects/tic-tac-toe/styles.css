@@ -142,17 +142,13 @@ form > * {
   grid-template-columns: 1fr 2fr;
 }
 
-.container > * {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
 .game-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
   gap: 8px;
+  margin-right: 8px;
 
   .game-actions {
     align-self: center;
@@ -175,6 +171,5 @@ form > * {
 
   .cell {
     border: 2px solid black;
-    background: gold;
   }
 }

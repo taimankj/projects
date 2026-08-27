@@ -256,6 +256,17 @@ const GameControl = (() => {
   };
 })();
 
+function setBoardColor() {
+  const board = document.querySelector(".game-board");
+
+  const boardColors = ["#53BF9D", "#F94C66", "#BD4291", "#FFC54D"];
+
+  let randomColor = Math.floor(Math.random() * 3) + 1;
+  let boardColor = boardColors[randomColor];
+
+  board.style.background = boardColor;
+}
+
 function loadTicTacToe(name, playerMarker) {
   const container = document.querySelector(".container");
   const playerName = document.querySelector("#player-name");
@@ -264,6 +275,8 @@ function loadTicTacToe(name, playerMarker) {
 
   container.style["display"] = "grid";
   playerName.innerText = name;
+
+  setBoardColor();
 }
 
 function getNPCMoveSet(randomMove) {
@@ -389,6 +402,12 @@ function setUpGame(player, npc) {
         return;
       }
 
+      // if (GameControl.checkBoardFilled()) {
+      //   alert(`Tie Reached. Resetting Game.`);
+      //   GameControl.resetGame(false, null, null);
+      //   resetGameHTML(boardCells);
+      // }
+
       didWin = makeMove(row, column, player, curr);
       if (didWin) {
         alert(`${player.name} wins!`);
@@ -396,14 +415,34 @@ function setUpGame(player, npc) {
         GameControl.resetGame(false, null, null);
         resetGameHTML(boardCells);
       } else {
-        didWin = npcMakeMove(npc, player, boardCells);
-        if (didWin) {
-          alert(`${npc.name} wins!`);
-          npcWins.innerText = `${npc.getWins()}`;
-          GameControl.resetGame(false, null, null);
-          resetGameHTML(boardCells);
+        if (!GameControl.checkBoardFilled()) {
+          didWin = npcMakeMove(npc, player, boardCells);
+          if (didWin) {
+            alert(`${npc.name} wins!`);
+            npcWins.innerText = `${npc.getWins()}`;
+            GameControl.resetGame(false, null, null);
+            resetGameHTML(boardCells);
+          }
+        } else {
         }
       }
     });
   });
 }
+
+// Styling
+// home page
+const xLabel = document.querySelector('label[for="x"]');
+const xRadio = document.querySelector('input#x[type="radio"]');
+const oLabel = document.querySelector('label[for="o"]');
+const oRadio = document.querySelector('input#o[type="radio"]');
+
+xRadio.addEventListener("click", (e) => {
+  xLabel.className = "x-chosen";
+  oLabel.className = "";
+});
+
+oRadio.addEventListener("click", (e) => {
+  oLabel.className = "o-chosen";
+  xLabel.className = "";
+});

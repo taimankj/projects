@@ -6,7 +6,6 @@
     <title>Tic Tac Toe</title>
     <link href="./styles.css" rel="stylesheet" />
     <script src="./script.js" defer></script>
-    <script src="./styling.js" defer></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,7 +26,7 @@
     <form>
       <fieldset class="name-input">
         <label for="name">NAME:</label>
-        <input type="text" id="name" name="name" />
+        <input type="text" id="name" name="name" required />
       </fieldset>
       <div class="choices">
         <legend>CHOOSE:</legend>
@@ -48,10 +47,10 @@
           <span id="player-name"></span>'s Wins: <span id="player-wins">0</span>
         </div>
         <div class="npc-wins">Opponent Wins: <span id="npc-wins">0</span></div>
-        <div class="game-actions">
+        <!-- <div class="game-actions">
           <button class="clear">Clear</button>
           <button class="reset">Reset</button>
-        </div>
+        </div> -->
       </div>
       <div class="game-board">
         <button class="cell TOP LEFT"></button>
