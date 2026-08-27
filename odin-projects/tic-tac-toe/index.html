@@ -6,22 +6,38 @@
     <title>Tic Tac Toe</title>
     <link href="./styles.css" rel="stylesheet" />
     <script src="./script.js" defer></script>
+    <script src="./styling.js" defer></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tac+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <form>
       <fieldset class="name-input">
-        <label for="name">Name:</label>
+        <label for="name">NAME:</label>
         <input type="text" id="name" name="name" />
       </fieldset>
       <div class="choices">
-        <legend>Choose:</legend>
+        <legend>CHOOSE:</legend>
         <div>
           <input type="radio" id="x" name="choice" value="x" checked />
-          <label for="x">X</label>
+          <label for="x">x</label>
         </div>
         <div>
           <input type="radio" id="o" name="choice" value="o" />
-          <label for="o">O</label>
+          <label for="o">o</label>
         </div>
       </div>
       <button id="play">Play</button>

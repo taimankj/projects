@@ -1,6 +1,8 @@
 :root {
   box-sizing: border-box;
+  font-family: "Tac One";
   font-size: 32px;
+  color: white;
 }
 
 body {
@@ -10,6 +12,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: #2c2c2c;
+  color: #797878;
 }
 
 body * {
@@ -40,18 +45,93 @@ form > * {
 
 .name-input {
   border: none;
+
+  label {
+    margin-right: 8px;
+  }
+
   input {
     width: 75%;
+    font-family: "Tac One";
+    font-size: 28px;
+    border-radius: 15px;
+    border: none;
+    padding: 8px;
+  }
+
+  input:focus {
+    box-shadow: 0 0 24px #797878;
   }
 }
 
 .choices {
   display: flex;
+  align-items: center;
   gap: 8px;
+
+  label {
+    font-family: "Lilita One";
+    font-size: 42px;
+  }
+
+  label[for="x"] {
+    color: #de3e3e;
+  }
+
+  label[for="o"] {
+    color: #39b1d1;
+  }
+
+  label[for="x"]:hover {
+    text-shadow:
+      0 0 5px #de3e3e,
+      0 0 10px #de3e3e,
+      0 0 20px #de3e3e;
+    cursor: pointer;
+  }
+
+  label[for="o"]:hover {
+    text-shadow:
+      0 0 5px #39b1d1,
+      0 0 10px #39b1d1,
+      0 0 20px #39b1d1;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    appearance: none;
+  }
+}
+
+.x-chosen {
+  text-shadow:
+    0 0 5px #de3e3e,
+    0 0 10px #de3e3e,
+    0 0 20px #de3e3e;
+}
+
+.o-chosen {
+  text-shadow:
+    0 0 5px #39b1d1,
+    0 0 10px #39b1d1,
+    0 0 20px #39b1d1;
 }
 
 #play {
   width: 15%;
+  font-size: 32px;
+  font-family: "Tac One";
+  padding: 8px;
+  background: #266210;
+  color: white;
+
+  border: none;
+  border-radius: 15px;
+}
+
+#play:hover {
+  /* border: 2px solid #90b800; */
+  box-shadow: 0 0 10px #90b800;
 }
 
 /* Gameboard Styling */
