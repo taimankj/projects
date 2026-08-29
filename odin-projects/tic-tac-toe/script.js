@@ -316,6 +316,7 @@ function getCell(boardCells, row, column) {
 
 function makeMove(row, column, player, cell) {
   cell.className += ` ${player.name}`;
+  cell.className += player.getMarker() === "x" ? " x-player" : " o-player";
   cell.innerText += ` ${player.getMarker()}`;
   GameControl.setBoardPos(row, column, player);
   return GameControl.checkWinner(row, column);
@@ -340,13 +341,16 @@ function npcMakeMove(npc, player, boardCells) {
   return didWin;
 }
 
-function resetGameHTML(board) {
+function resetGameHTML(board, player, npc) {
   board.forEach((cell) => {
     let className = cell.className.split(" ");
     let removedPlayer = className.slice(0, 3).join(" ");
     cell.className = removedPlayer;
     cell.innerText = "";
   });
+  if (player.getMarker() === "o") {
+    npcMakeMove(npc, player, board);
+  }
 }
 document.querySelector("#play").addEventListener("click", (e) => {
   e.preventDefault();
@@ -402,18 +406,12 @@ function setUpGame(player, npc) {
         return;
       }
 
-      // if (GameControl.checkBoardFilled()) {
-      //   alert(`Tie Reached. Resetting Game.`);
-      //   GameControl.resetGame(false, null, null);
-      //   resetGameHTML(boardCells);
-      // }
-
       didWin = makeMove(row, column, player, curr);
       if (didWin) {
         alert(`${player.name} wins!`);
         playerWins.innerText = `${player.getWins()}`;
         GameControl.resetGame(false, null, null);
-        resetGameHTML(boardCells);
+        resetGameHTML(boardCells, player, npc);
       } else {
         if (!GameControl.checkBoardFilled()) {
           didWin = npcMakeMove(npc, player, boardCells);
@@ -421,9 +419,17 @@ function setUpGame(player, npc) {
             alert(`${npc.name} wins!`);
             npcWins.innerText = `${npc.getWins()}`;
             GameControl.resetGame(false, null, null);
-            resetGameHTML(boardCells);
+            resetGameHTML(boardCells, player, npc);
+          }
+          if (GameControl.checkBoardFilled()) {
+            alert(`Tie reached. Resetting Game...`);
+            GameControl.resetGame(false, null, null);
+            resetGameHTML(boardCells, player, npc);
           }
         } else {
+          alert(`Tie reached. Resetting Game...`);
+          GameControl.resetGame(false, null, null);
+          resetGameHTML(boardCells, player, npc);
         }
       }
     });

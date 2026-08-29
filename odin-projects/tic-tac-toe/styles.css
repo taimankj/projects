@@ -173,3 +173,15 @@ form > * {
     border: 2px solid black;
   }
 }
+
+.x-player {
+  font-family: "Lilita One";
+  font-size: 42px;
+  color: #de3e3e;
+}
+
+.o-player {
+  font-family: "Lilita One";
+  font-size: 42px;
+  color: #39b1d1;
+}
