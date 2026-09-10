@@ -1,0 +1,136 @@
+dialog {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 24px;
+  position: relative;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  color: white;
+  background: #f9c74f;
+  padding: 40px 30px;
+  border-radius: 10px;
+  border-left: 5px solid #f9844a;
+  height: auto;
+
+  input {
+    border: none;
+    background: #f8961e;
+    border-radius: 50px;
+    height: 24px;
+    padding: 5px 15px;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    border: none;
+
+    label {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+input[type="text"] {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+table {
+  table-layout: auto;
+  margin: 10px auto;
+  border-collapse: collapse;
+  width: 95%;
+
+  * {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    padding: 0.6em;
+  }
+
+  button {
+    color: rgba(255, 255, 255, 0.735);
+  }
+
+  button:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.table-button {
+  display: flex;
+  align-items: cener;
+  justify-content: center;
+  border: none;
+}
+
+/* Buttons */
+button {
+  width: 125px;
+  height: calc(0.3 * 125px);
+  border: none;
+  border-radius: 50px;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.delete {
+  background-color: #f94144;
+}
+
+.delete:hover {
+  box-shadow: 0px 0px 7px 0px #f94144;
+}
+
+.add {
+  background-color: #90be6d;
+}
+
+.add:hover,
+form button:hover {
+  box-shadow: 0px 0px 7px 5px #90be6d;
+}
+
+.alert-message {
+  width: 100vw;
+  height: clamp(50px, calc(0.2 * 100vh), 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form button {
+  background: #90be6d;
+  align-self: start;
+}
+
+.close-dialog {
+  background-color: #f94144;
+  border-radius: 25px;
+  width: auto;
+  padding: 0px 15px;
+  position: absolute;
+  right: 0;
+}
+
+.close-dialog:hover {
+  box-shadow: 0px 0px 7px 0px #f94144;
+}
