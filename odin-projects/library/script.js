@@ -1,9 +1,11 @@
 const myLibrary = [];
 
-function Book(author, title) {
-  this.author = author;
-  this.title = title;
-  this.id = crypto.randomUUID();
+class Book {
+  constructor(author, title) {
+    this.author = author;
+    this.title = title;
+    this.id = crypto.randomUUID();
+  }
 }
 
 function addBookToLibrary(author, title) {
@@ -74,27 +76,5 @@ form.addEventListener("submit", (e) => {
 
   displayBooks(myLibrary);
 });
-
-// Test books
-// addBookToLibrary("George Orwell", "1984");
-// addBookToLibrary("J.R.R. Tolkien", "The Hobbit");
-// addBookToLibrary("Harper Lee", "To Kill a Mockingbird");
-// addBookToLibrary("F. Scott Fitzgerald", "The Great Gatsby");
-// addBookToLibrary("Jane Austen", "Pride and Prejudice");
-// addBookToLibrary("Ray Bradbury", "Fahrenheit 451");
-// addBookToLibrary("Mary Shelley", "Frankenstein");
-// addBookToLibrary("Bram Stoker", "Dracula");
-// addBookToLibrary("Herman Melville", "Moby-Dick");
-// addBookToLibrary("J.D. Salinger", "The Catcher in the Rye");
-// addBookToLibrary("Aldous Huxley", "Brave New World");
-// addBookToLibrary("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
-// addBookToLibrary("Stephen King", "The Shining");
-// addBookToLibrary("Frank Herbert", "Dune");
-// addBookToLibrary("Suzanne Collins", "The Hunger Games");
-// addBookToLibrary("Andy Weir", "The Martian");
-// addBookToLibrary("Cormac McCarthy", "The Road");
-// addBookToLibrary("Margaret Atwood", "The Handmaid's Tale");
-// addBookToLibrary("William Golding", "Lord of the Flies");
-// addBookToLibrary("Khaled Hosseini", "The Kite Runner");
 
 displayBooks(myLibrary);
