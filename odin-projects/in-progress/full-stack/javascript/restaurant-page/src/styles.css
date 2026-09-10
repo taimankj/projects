@@ -22,47 +22,98 @@ nav {
   display: flex;
   flex-direction: column;
 
-  gap: 24px;
+  gap: 48px;
 }
 
 button {
   font-size: 1rem;
 
   border: none;
-  border-top-left-radius: 5px;
+  border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 
   background-color: #cfbb99;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .btn-selected {
   background: #cfbb99;
   background: linear-gradient(
     90deg,
-    rgba(207, 187, 153, 1) 30%,
-    rgba(133, 128, 97, 1) 63%,
+    rgba(70, 77, 49, 1) 67%,
     rgba(53, 64, 36, 1) 100%
   );
-  color: black;
 }
 
 #content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.home-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   gap: 16px;
   padding: 32px;
+
+  * {
+    background-color: #889063;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 0.9rem;
+    margin: 0 16px;
+  }
+
+  h1 {
+    font-style: italic;
+  }
 }
 
-#content > * {
-  background-color: #889063;
-  border-radius: 5px;
-  padding: 8px;
-  font-size: 0.9rem;
-  margin: 0 16px;
-}
+.menu-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
-#content h1 {
-  font-style: italic;
+  gap: 16px;
+
+  .dish-card {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    background-color: #889063;
+
+    border-radius: 15px;
+
+    h2 {
+      width: 100%;
+      font-style: italic;
+      background-color: #e5d7c4;
+    }
+
+    p {
+      width: 100%;
+      font-size: 0.9rem;
+      background-color: #e5d7c4;
+    }
+
+    img {
+      width: 300px;
+      align-self: center;
+    }
+  }
 }
